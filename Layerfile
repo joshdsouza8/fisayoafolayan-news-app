@@ -11,6 +11,7 @@ RUN sudo apt install php5.6
 RUN sudo apt-get install composer
 
 RUN sudo apt install php-zip
+RUN sudo apt install ext-zip
 
 # Install laravel
 ENV COMPOSER_ALLOW_SUPERUSER=1 PATH=~/.config/composer/vendor/bin:$PATH
