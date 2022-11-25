@@ -11,6 +11,7 @@ RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/
 ENV COMPOSER_ALLOW_SUPERUSER=1 PATH=~/.config/composer/vendor/bin:$PATH
 RUN composer global require laravel/installer
 
+
 # Run app
 COPY . .
 
