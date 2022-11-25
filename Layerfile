@@ -4,13 +4,20 @@ FROM vm/ubuntu:18.04
 # To note: Layerfiles create entire VMs, *not* containers!
 
 # Install php5 & composer
-RUN sudo apt install php7.2-common php7.2-cli php7.2-gd php7.2-mysql php7.2-curl php7.2-intl php7.2-mbstring php7.2-bcmath php7.2-imap php7.2-xml php7.2-zip
+RUN sudo apt-get install php
+RUN sudo apt-get install php-mbstring
+RUN sudo apt-get install php-xml
+RUN sudo apt-get install php-zip
+RUN sudo apt-get install curl
 RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install laravel
-ENV COMPOSER_ALLOW_SUPERUSER=1 PATH=~/.config/composer/vendor/bin:$PATH
-RUN composer global require laravel/installer
+RUN sudo chown -R $USER ~/.composer/
+RUN composer global require "laravel/installer"
+RUN echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+RUN source ~/.bashrc
 
+ENV COMPOSER_ALLOW_SUPERUSER=1 PATH=~/.config/composer/vendor/bin:$PATH
 
 # Run app
 COPY . .
