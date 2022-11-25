@@ -4,12 +4,10 @@ FROM vm/ubuntu:18.04
 # To note: Layerfiles create entire VMs, *not* containers!
 
 # Install php5 & composer
-RUN apt-get update && \\
-    apt-get install software-properties-common && \\
-    yes | add-apt-repository ppa:ondrej/php && \\
-    apt-get update && \\
-    apt-get install curl php7.3-cli php7.3-mbstring php7.3-zip php7.3-dom \\
-            git unzip
+RUN sudo add-apt-repository -y ppa:ondrej/php
+RUN sudo apt update
+RUN sudo apt install php5.6
+
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php && \\
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \\
     rm composer-setup.php
