@@ -4,14 +4,8 @@ FROM vm/ubuntu:18.04
 # To note: Layerfiles create entire VMs, *not* containers!
 
 # Install php5 & composer
-RUN sudo add-apt-repository -y ppa:ondrej/php
-RUN sudo apt update
-RUN sudo apt install php5.6
-
-RUN sudo apt-get install composer
-
-RUN sudo apt install php-zip
-RUN sudo apt install ext-zip
+RUN sudo apt install php7.2-common php7.2-cli php7.2-gd php7.2-mysql php7.2-curl php7.2-intl php7.2-mbstring php7.2-bcmath php7.2-imap php7.2-xml php7.2-zip
+RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install laravel
 ENV COMPOSER_ALLOW_SUPERUSER=1 PATH=~/.config/composer/vendor/bin:$PATH
